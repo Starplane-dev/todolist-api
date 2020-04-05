@@ -1,16 +1,13 @@
-var mysql = require('mysql');
+const { Client } = require('pg');
 
-var connexion = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: "todolist"
-});
+const connexion = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
 
 connexion.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
-    init();
 });
 
 function init(){
