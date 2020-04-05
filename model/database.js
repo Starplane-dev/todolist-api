@@ -1,9 +1,11 @@
-const { Client } = require('pg');
+var mysql = require('mysql');
 
-const connexion = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: false,
-  });
+var connexion = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "root",
+    database: "todolist"
+});
 
 connexion.connect(function(err) {
     if (err) throw err;
@@ -12,7 +14,7 @@ connexion.connect(function(err) {
 });
 
 function init(){
-    connexion.query("CREATE TABLE Tache(tache_id VARCHAR(36) NOT NULL,tache_titre VARCHAR(50) NOT NULL,tache_debut DATE NOT NULL,tache_fin DATE NOT NULL,tache_statut VARCHAR(21) NOT NULL,tache_tags VARCHAR(100),PRIMARY KEY(tache_id));", function (err, result) {
+    connexion.query("USE todolist;", function (err, result) {
         if (err) {
             return console.error(err.message);
         }

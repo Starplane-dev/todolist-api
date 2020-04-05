@@ -13,10 +13,8 @@ app.use(bodyParser.json());
 
 // Gestion du filtre pour statut et tags
 app.get('/taches', (req, res) => {
-    console.log("arrivé a /taches !")
     var todolist = [];
     database.getAll(function(result){
-        console.log("requete faite")
         result.forEach(elt => {
             var tache = new Tache(
                 elt.tache_titre, 
@@ -28,7 +26,6 @@ app.get('/taches', (req, res) => {
             todolist.push(tache);
         });
         res.status(200);
-        console.log("juste avant envoi")
         res.send(JSON.stringify(todolist));
     });
 });
