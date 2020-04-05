@@ -8,10 +8,11 @@ const connexion = new Client({
 connexion.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
+    init();
 });
 
 function init(){
-    connexion.query("USE todolist;", function (err, result) {
+    connexion.query("CREATE TABLE Tache(tache_id VARCHAR(36) NOT NULL,tache_titre VARCHAR(50) NOT NULL,tache_debut DATE NOT NULL,tache_fin DATE NOT NULL,tache_statut VARCHAR(21) NOT NULL,tache_tags VARCHAR(100),PRIMARY KEY(tache_id));", function (err, result) {
         if (err) {
             return console.error(err.message);
         }
